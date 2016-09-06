@@ -1,24 +1,23 @@
 
 var fn_index = async (ctx, next) => {
-	ctx.response.body = `
-		<h1>Index</h1>
-		<form action="/signin" method="post">
-			<p>Name: <input name="name" /></p>
-			<p>Passd: <input type="password" name="password" /></p>
-			<p><input type="submit" value="Submit" /></p>
-		</form>
-	`;
+	ctx.render('index.html', {
+        title: 'Welcome'
+    });
 }
 
 var fn_signin = async(ctx, next) => {
-	var name = ctx.request.body.name || "";
+	var email = ctx.request.body.email || "";
 	var password = ctx.request.body.password || "";
-	console.log(`signin with name: ${name}, password: ${password}`);
-	if(name === 'koa' && password === '123456'){
-		ctx.response.body = `<h1>Welcome ${name}</h1>`;
+	console.log(`signin with email: ${email}, password: ${password}`);
+	if(email === 'koa@shure.com' && password === '123456'){
+		ctx.render('signin-ok.html', {
+			title: 'Sign In Ok!',
+			name: 'shure'
+		});
 	} else {
-		ctx.response.body = `<h1>Login faild!</h1>
-		<p><a href="/">Try again</a></p>`;
+		ctx.render('signin-failed.html', {
+			title: 'Sign In Failed!'
+		});
 	}
 }
 

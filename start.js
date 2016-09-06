@@ -4,4 +4,4 @@ register({
     presets: ['stage-3']
 });
 
-require('./app.js');
+require('./test/test-app.js');
